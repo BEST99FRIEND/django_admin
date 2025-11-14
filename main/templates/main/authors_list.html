@@ -1,0 +1,55 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Authors</title>
+    <style>
+      body{
+        font-family:Segoe UI, Arial, Helvetica,
+        sans-serif;margin:24px
+    }
+      table{
+        border-collapse:collapse;
+        width:100%
+    }
+      th,td{
+        border:1px solid #ddd;
+        padding:8px;
+        text-align:left;
+    }
+      th{
+        background:#f4f4f4;
+    }
+    </style>
+  </head>
+  <body>
+    <h1>Authors</h1>
+    <p><a href="/books/">View books</a></p>
+    {% if authors %}
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Birth Date</th>
+          <th>Active</th>
+          <th>Bio</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for author in authors %}
+        <tr>
+          <td>{{ author.name }}</td>
+          <td>{{ author.birth_date }}</td>
+          <td>{{ author.is_active }}</td>
+          <td>{{ author.bio|linebreaksbr }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% else %}
+    <p>No authors found.</p>
+    {% endif %}
+  </body>
+</html>
