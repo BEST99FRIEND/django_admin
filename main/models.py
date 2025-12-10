@@ -2,10 +2,12 @@ from django.db import models
 
 class Book(models.Model):
     title = models.CharField(max_length=200)
-    author = models.ForeignKey('Author', on_delete=models.CASCADE)
-    published_date = models.DateField()
+    author = models.ManyToManyField('Author', related_name='books')
+    genre = models.CharField(max_length=100)
+    published_year = models.DateField()
     price = models.PositiveIntegerField()
-    description = models.TextField()
+    desc = models.TextField()
+    is_active = models.BooleanField(default=True)
     updated_at = models.DateTimeField(auto_now=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
@@ -21,3 +23,9 @@ class Author(models.Model):
 
     def __str__(self):
         return self.name
+    
+class Meta:
+    db_table = 'Book'
+    verbose_name = 'Book'
+    verbose_name_plural = 'Books'
+    ordering = ['-created_at']
