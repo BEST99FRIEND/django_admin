@@ -19,4 +19,3 @@ def books_list(request):
 def authors_list(request):
     authors = Author.objects.all().order_by('name')
     return render(request, 'main/authors_list.html', {'authors': authors})
-e
